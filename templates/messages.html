@@ -1,0 +1,10 @@
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == "success" %}  <script> alertify.success('{{message}}');</script> {% endif %}
+{% if message.tags == "error" %}  <script> alertify.error('{{message}}');</script> {% endif %}
+
+{% if message.tags == "warning" %}<script>alertify.confirm('Delete Comment', '{{message}}', function(){ alertify.success('Ok') }
+    , function(){ alertify.error('Cancel')});</script>{% endif %}
+{% endfor %}
+
+{% endif %}

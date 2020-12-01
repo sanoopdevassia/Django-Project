@@ -1,0 +1,14 @@
+{
+    "python.pythonPath": "C:\\Users\\ANOOP DEVASIA\\envs\\test\\Scripts\\python.exe",
+    "php.validate.executablePath": "",
+    
+    "[jsonc]": {
+
+        "editor.quickSuggestions": {
+            "strings": true
+            
+        },
+        "editor.suggest.insertMode": "replace",
+    },
+    "python.terminal.activateEnvInCurrentTerminal": true
+}

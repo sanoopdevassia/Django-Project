@@ -1,0 +1,285 @@
+ {% extends 'index.html' %}
+ {% block style %}
+ <style type="text/css">
+ 	.form-style-9 {
+ 		max-width: 450px;
+ 		background: #FAFAFA;
+ 		padding: 30px;
+ 		margin: 50px auto;
+ 		box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+ 		border-radius: 10px;
+ 		border: 6px solid #eb4a36;
+ 	}
+
+ 	.form-style-9 ul {
+ 		padding: 0;
+ 		margin: 0;
+ 		margin: 0;
+ 		list-style: none;
+ 	}
+
+ 	.form-style-9 ul li {
+ 		display: block;
+ 		margin-bottom: 10px;
+ 		min-height: 35px;
+ 		color: black;
+ 	}
+
+ 	.form-style-9 ul li .field-style {
+ 		box-sizing: border-box;
+ 		-webkit-box-sizing: border-box;
+ 		-moz-box-sizing: border-box;
+ 		padding: 8px;
+ 		outline: none;
+ 		border: 1px solid #B0CFE0;
+ 		-webkit-transition: all 0.30s ease-in-out;
+ 		-moz-transition: all 0.30s ease-in-out;
+ 		-ms-transition: all 0.30s ease-in-out;
+ 		-o-transition: all 0.30s ease-in-out;
+
+ 	}
+
+ 	.form-style-9 ul li .field-style:focus {
+ 		box-shadow: 0 0 5px #eb4a36;
+ 		border: 1px solid #eb4a36;
+ 	}
+
+ 	.form-style-9 ul li .field-split {
+ 		width: 49%;
+ 	}
+
+ 	.form-style-9 ul li .field-split-4 {
+ 		width: 40%;
+ 	}
+
+ 	.form-style-9 ul li .field-split-6 {
+ 		width: 60%;
+ 	}
+
+ 	.form-style-9 ul li .field-split-2 {
+ 		width: 20%;
+ 	}
+
+ 	.form-style-9 ul li .field-full {
+ 		width: 100%;
+ 	}
+
+ 	.form-style-9 ul li input.align-left {
+ 		float: left;
+ 	}
+
+ 	.form-style-9 ul li input.align-right {
+ 		float: right;
+ 	}
+
+ 	.form-style-9 ul li textarea {
+ 		width: 100%;
+ 		height: 100px;
+ 	}
+
+ 	.form-style-9 ul li input[type="button"],
+ 	.form-style-9 ul li input[type="submit"] {
+ 		-moz-box-shadow: inset 0px 1px 0px 0px #eb4a36;
+ 		-webkit-box-shadow: inset 0px 1px 0px 0px#eb4a36;
+ 		box-shadow: inset 0px 1px 0px 0px #eb4a36;
+ 		background-color: #eb4a36;
+ 		border: 1px solid #eb4a36;
+ 		display: inline-block;
+ 		cursor: pointer;
+ 		color: #FFFFFF;
+ 		padding: 8px 18px;
+ 		text-decoration: none;
+ 		font: 12px Arial, Helvetica, sans-serif;
+ 	}
+
+ 	.form-style-9 ul li input[type="button"]:hover,
+ 	.form-style-9 ul li input[type="submit"]:hover {
+ 		background: linear-gradient(to bottom, #eb4a36 5%, #eb4a36 100%);
+ 		background-color: #eb4a36;
+ 	}
+
+ 	.MultiCheckBox {
+ 		border: 1px solid #e2e2e2;
+ 		padding: 5px;
+ 		border-radius: 4px;
+ 		cursor: pointer;
+ 	}
+
+ 	.MultiCheckBox .k-icon {
+ 		font-size: 15px;
+ 		float: right;
+ 		font-weight: bolder;
+ 		margin-top: -7px;
+ 		height: 10px;
+ 		width: 14px;
+ 		color: #787878;
+ 	}
+
+ 	.MultiCheckBoxDetail {
+ 		display: none;
+ 		position: absolute;
+ 		border: 1px solid #e2e2e2;
+ 		overflow-y: hidden;
+ 	}
+
+ 	.MultiCheckBoxDetailBody {
+ 		overflow-y: scroll;
+ 	}
+
+ 	.MultiCheckBoxDetail .cont {
+ 		clear: both;
+ 		overflow: hidden;
+ 		padding: 2px;
+ 	}
+
+ 	.MultiCheckBoxDetail .cont:hover {
+ 		background-color: #cfcfcf;
+ 	}
+
+ 	.MultiCheckBoxDetailBody>div>div {
+ 		float: left;
+ 	}
+
+ 	.MultiCheckBoxDetail>div>div:nth-child(1) {}
+
+ 	.MultiCheckBoxDetailHeader {
+ 		overflow: hidden;
+ 		position: relative;
+ 		height: 28px;
+ 		background-color: #fc4b0b;
+ 	}
+
+ 	.MultiCheckBoxDetailHeader>input {
+ 		position: absolute;
+ 		top: 4px;
+ 		left: 3px;
+ 	}
+
+ 	.MultiCheckBoxDetailHeader>div {
+ 		position: absolute;
+ 		top: 5px;
+ 		left: 24px;
+ 		color: #fff;
+ 	}
+
+ 	.select2-container--default .select2-selection--multiple .select2-selection__choice {
+ 		margin-bottom: 0 !important;
+ 		min-height: unset !important;
+ 	}
+ </style>
+ {% endblock  %}
+ {% block content %}
+ <div class="recipe uk-section uk-section-default uk-padding-remove-top">
+ 	<div class="uk-container">
+ 		<div class="uk-grid-large data-uk-grid">
+ 			<div class="uk-width-1@m">
+ 				<div class="color-dark uk-border-rounded-large uk-light uk-padding uk-margin-top">
+ 					<form class="form-style-9" action="addrec" method="POST" enctype="multipart/form-data">
+ 						{% csrf_token %}
+ 						<div> {% include 'messages.html' %} </div>
+ 						<ul>
+ 							<li>
+ 								<input type="text" name="title" class="field-style field-full align-none"
+ 									placeholder="Title" required />
+ 							</li>
+ 							<li>
+ 								<textarea name="descr" class="field-style" placeholder="Description"
+ 									required></textarea>
+ 							</li>
+
+ 							<li>
+ 								<input type="text" name="active_time" class="field-style field-split align-left"
+ 									placeholder="Active Time" / required>
+ 								<input type="text" name="total_time" class="field-style field-split align-right"
+ 									placeholder="Total Time" / required>
+
+ 							</li>
+
+
+
+ 							<li style="display: inline-block;width: 100%;">
+ 								<select class="js-example-basic-multiple" name="categories" multiple="multiple"
+ 									style="width: 100%;">
+ 									{% for cat in cat %}
+ 									<option value="{{cat.id}}">{{cat.category_name}}</option>
+ 									{%endfor%}
+ 								</select>
+ 							</li>
+
+ 							<li>
+ 								<input type="text" name="serves" class="field-style field-split align-left"
+ 									placeholder="Serves" required />
+ 								<input type="file" name="image" class="field-style field-split align-right"
+ 									placeholder="image" required />
+ 							</li>
+ 						</ul>
+ 						<ul class="steps">
+ 							<li>Steps</li>
+ 							<li class="step">
+ 								<input type="number" name="steps[stepno]" class="field-style field-split-2"
+ 									placeholder="Stepno" required />
+ 								<input type="text" name="steps[addstep]" class="field-style field-split-6"
+ 									placeholder="Add Step" required />
+ 								<input id="addStep" type="button" value="Add" />
+ 							</li>
+ 						</ul>
+ 						<ul class="ingredients">
+ 							<li>Ingredients</li>
+ 							<li class="incr">
+ 								<input type="text" name="ingredients[no]" class="field-style field-split align-left"
+ 									placeholder="Add Ingredient" required />
+ 								<input id="addinc" type="button" value="Add" />
+ 							</li>
+
+ 						</ul>
+ 						<li>
+ 							<input type="submit" value="Add recipe" />
+ 						</li>
+ 					</form>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ </div>
+ {% endblock  %}
+
+ {% block script %}
+ <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+ <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+ <script>
+ 	$('document').ready(function () {
+ 		var instruction = $(".steps li.step").length - 1;
+ 		$("#addStep").on('click', function () {
+ 			++instruction;
+ 			$(".steps").append('<li class="step">' +
+ 				'<input type="number" name="steps[stepno]" class="field-style field-split-2 "placeholder="Stepno" />' +
+ 				'<input type="text" name="steps[addstep]" class="field-style field-split-6" placeholder="Add Step" />' +
+ 				'<input class="remove-step" type="button" value="Remove" />' +
+ 				'</li>');
+ 		});
+
+ 		$(document).on('click', '.remove-step', function () {
+ 			$(this).parents('li').remove();
+ 		});
+ 	});
+ 	$('document').ready(function () {
+ 		var instruction = $(".ingredients li.incr").length - 1;
+ 		$("#addinc").on('click', function () {
+ 			++instruction;
+ 			$(".ingredients").append('<li class="incr">' +
+ 				'<input type="text" name="ingredients[no]" class="field-style field-split-6" placeholder="Add Ingredient" />' +
+ 				'<input class="remove-step" type="button" value="Remove" />' +
+ 				'</li>');
+ 		});
+
+ 		$(document).on('click', '.remove-step', function () {
+ 			$(this).parents('li').remove();
+ 		});
+ 	});
+ 	$(document).ready(function () {
+ 		$('.js-example-basic-multiple').select2({
+			 placeholder: "Select categories"
+			});
+ 	});
+ </script>
+ {% endblock %}

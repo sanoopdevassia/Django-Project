@@ -1,0 +1,21 @@
+.color-dark label.uk-form-label{
+    color: #000000;
+}
+
+.color-dark input{
+    color: #000000 !important;
+    border: 1px solid #858585;
+}
+
+.color-dark input:focus{
+    border: 1px solid #eb4a36 !important;
+}
+
+.color-dark textarea{
+    color: #000000 !important;
+    border: 1px solid #858585;
+}
+
+.color-dark textarea:focus{
+    border: 1px solid #eb4a36 !important;
+}

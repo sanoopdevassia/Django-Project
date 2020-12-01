@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Oiishi</title>
+</head>
+<br>
+    <h1>{{Name}} {{re.title}}</h1>
+     <br>{{descr}}<br>
+    <br>Active Time:{{active}} mins</br>
+    <br>Total Time:{{total}} mins</br>
+    <br>Serves:{{serves}}</br>
+   <h1><u>Ingredients</u></h1>
+   {% for inc in incr %}
+   <br>* {{inc.ingredient}}
+   {% endfor %}
+   <h1><u>Steps</u></h1>
+   {% for st in step %}
+   <br><b>Step {{st.order_no}}</b>:{{st.step}}</br>
+   {% endfor %}
+
+</body>
+</html>

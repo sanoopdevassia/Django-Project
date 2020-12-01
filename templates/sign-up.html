@@ -1,0 +1,129 @@
+{% load  static %}
+<!DOCTYPE html>
+<html lang="en-gb" dir="ltr">
+<!-- Mirrored from html-theme-kocina.now.sh/sign-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Aug 2020 09:24:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oiishi</title>
+  <link rel="shortcut icon" type="image/png" href="img/favicon.png" >
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Leckerli+One&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/main.css'%}" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  <script src="{% static 'js/uikit.js'%}"></script>
+  <style>
+    .alert {
+      padding: 20px;
+      background-color: #f44336;
+      color: white;
+    }
+    
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    .closebtn:hover {
+      color: black;
+    }
+    </style>
+</head>
+
+<body>
+  {% if messages %}
+  {% for message in messages %}
+  {% if message.tags == "success" %}  <script> alertify.success('{{message}}');</script> {% endif %}
+  {% if message.tags == "error" %}  <script> alertify.error('{{message}}');</script> {% endif %}
+  {% if message.tags == "warning" %}  <script> alertify.warning('{{message}}');</script> {% endif %}
+  {% endfor %}
+  
+  {% endif %}
+<div class="uk-grid-collapse" data-uk-grid>
+  <div class="uk-width-1-2@m uk-padding-large uk-flex uk-flex-middle uk-flex-center" data-uk-height-viewport>
+    <div class="uk-width-3-4@s">
+      <div class="uk-text-center uk-margin-bottom">
+        <a class="uk-logo uk-text-primary uk-text-bold" href="index.html">Oiishi</a>
+      </div>
+      <div class="uk-text-center uk-margin-medium-bottom">
+        <h1 class="uk-h2 uk-letter-spacing-small">Create an Account</h1>
+      </div>
+      <div data-uk-grid class="uk-child-width-auto uk-grid-small uk-flex uk-flex-center uk-margin">
+        <div>
+          <a href="#" data-uk-icon="icon: facebook" class="uk-icon-button uk-icon-button-large facebook"></a>
+        </div>
+        <div>
+          <a href="#" data-uk-icon="icon: google-plus" class="uk-icon-button uk-icon-button-large google-plus"></a>
+        </div>
+        <div>
+          <a href="#" data-uk-icon="icon: linkedin" class="uk-icon-button uk-icon-button-large linkedin"></a>
+        </div>
+      </div>    
+      <div class="uk-text-center uk-margin">
+        <p class="uk-margin-remove">Or use your email for registration:</p>
+      </div>
+      <form class="uk-text-center" action="sign-up"  method="post">{% csrf_token %} 
+        <div class="uk-width-1-1 uk-margin">
+          <label class="uk-form-label" for="name">First Name</label>
+          <input name="firstname" class="uk-input uk-form-large uk-border-pill uk-text-center" type="text" placeholder="Tom " required>
+        </div>
+        <div class="uk-width-1-1 uk-margin">
+          <label class="uk-form-label" for="name">Last Name</label>
+          <input name="secondname" class="uk-input uk-form-large uk-border-pill uk-text-center" type="text" placeholder="Atkins" required>
+        </div>
+        
+        <div class="uk-width-1-1 uk-margin">
+          <label class="uk-form-label" for="email">Email</label>
+          <input name="email" class="uk-input uk-form-large uk-border-pill uk-text-center" type="email" placeholder="tom@company.com" required>
+        </div>
+        
+        <div class="uk-width-1-1 uk-margin">
+          <label class="uk-form-label" for="password">Password</label>
+          <input name="password" class="uk-input uk-form-large uk-border-pill uk-text-center" type="password" placeholder="Min 8 characters" required>
+        </div>
+        <div class="uk-width-1-1 uk-text-center">
+          <button class="uk-button uk-button-primary uk-button-large" type="submit">Signs Up</button>
+        </div>
+        <div class="uk-width-1-1 uk-margin uk-text-center">
+          <p class="uk-text-small uk-margin-remove">By signing up you agree to our <a class="uk-link-border" href="#">terms</a> of service.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="uk-width-1-2@m uk-padding-large uk-flex uk-flex-middle uk-flex-center uk-light" data-uk-height-viewport>
+    <div class="uk-background-cover uk-background-norepeat uk-background-blend-overlay uk-background-overlay 
+      uk-border-rounded-large uk-width-1-1 uk-height-xlarge uk-flex uk-flex-middle uk-flex-center" 
+      style="background-image: url(https://source.unsplash.com/2wq0ReWAM8I/600x600);">
+      <div class="uk-padding-large">
+        <div class="uk-text-center">
+          <h2 class="uk-letter-spacing-small">Welcome Back</h2>
+        </div>
+        <div class="uk-margin-top uk-margin-medium-bottom uk-text-center">
+          <p>Already signed up, enter your details and start cooking your first meal today</p>
+        </div>
+        <div class="uk-width-1-1 uk-text-center">
+          <a href="sign-in" class="uk-button uk-button-primary uk-button-large">Sign In</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      {% for m in messages %}
+      <h1>{{m}}</h1>
+      {% endfor %}
+     </div> 
+</body>
+
+
+<!-- Mirrored from html-theme-kocina.now.sh/sign-up.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Aug 2020 09:24:10 GMT -->
+</html>
+
