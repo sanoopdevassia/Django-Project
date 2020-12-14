@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Oiishi</title>
+  <title>Oishi</title>
   <link rel="shortcut icon" type="image/png" href="img/favicon.png" >
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600&amp;display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Leckerli+One&amp;display=swap" rel="stylesheet">
@@ -53,7 +53,7 @@
   <div class="uk-width-1-2@m uk-padding-large uk-flex uk-flex-middle uk-flex-center" data-uk-height-viewport>
     <div class="uk-width-3-4@s">
       <div class="uk-text-center uk-margin-bottom">
-        <a class="uk-logo uk-text-primary uk-text-bold" href="index.html">Oiishi</a>
+        <a class="uk-logo uk-text-primary uk-text-bold" href="index.html">Oishi</a>
       </div>
       <div class="uk-text-center uk-margin-medium-bottom">
         <h1 class="uk-h2 uk-letter-spacing-small">Create an Account</h1>
@@ -89,7 +89,7 @@
         
         <div class="uk-width-1-1 uk-margin">
           <label class="uk-form-label" for="password">Password</label>
-          <input name="password" class="uk-input uk-form-large uk-border-pill uk-text-center" type="password" placeholder="Min 8 characters" required>
+          <input name="password" class="uk-input uk-form-large uk-border-pill uk-text-center" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Min 8 characters" required>
         </div>
         <div class="uk-width-1-1 uk-text-center">
           <button class="uk-button uk-button-primary uk-button-large" type="submit">Signs Up</button>
@@ -116,11 +116,7 @@
         </div>
       </div>
     </div>
-    <div>
-      {% for m in messages %}
-      <h1>{{m}}</h1>
-      {% endfor %}
-     </div> 
+   
 </body>
 
 

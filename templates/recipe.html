@@ -53,7 +53,7 @@
 </style>
 {% endblock %}
 {% block header %}
-<div>  {% include 'messages.html' %} </div>
+
 <div class="uk-container">
   <div data-uk-grid>
     <div class="uk-width-1-2@s">
@@ -162,7 +162,25 @@
             <input type="submit" name="submit" value="Post Review">
           </form>
              
+          {% if messages %}
+	{% for message in messages %}
+	{% if message.tags == "success" %}  <script> alertify.success('{{message}}');</script> {% endif %}
+	{% if message.tags == "error" %}  <script> alertify.error('{{message}}');</script> {% endif %}
+	
+	{% endfor %}
+	
+	{% endif %}
           {% for comment in com %}
+          {% if messages %}
+          {% for message in messages %}
+          
+    
+          
+          {% if message.tags == "warning" %}<script>alertify.confirm('Delete Comment', '{{message}}', function(){ window.location.replace("/reci/delcomment/{{comment.id}}/{{recipe.id}}"); }
+            , function(){ window.location.replace("/reci/recipe/{{recipe.id}}");});</script>{% endif %}
+          {% endfor %}
+    
+          {% endif %}
           <ul class="uk-comment-list uk-margin-medium-top">
             <li>
               <article class="uk-comment uk-visible-toggle" tabindex="-1">
@@ -193,17 +211,8 @@
                 {% ifequal comment.author.id user.id %}
                 
                 
-                <a href="/reci/warning/{{comment.id}}/{{recipe.id}}"  align="right" style="color:red;font-size:14px;">delete </a>
-                {% if messages %}
-                {% for message in messages %}
-                {% if message.tags == "success" %}  <script> alertify.success('{{message}}');</script> {% endif %}
-                {% if message.tags == "error" %}  <script> alertify.error('{{message}}');</script> {% endif %}
-
-                {% if message.tags == "warning" %}<script>alertify.confirm('Delete Comment', '{{message}}', function(){ window.location.replace("/reci/delcomment/{{comment.id}}/{{recipe.id}}"); }
-                    , function(){ window.location.replace("/reci/recipe/{{recipe.id}}");});</script>{% endif %}
-                {% endfor %}
-
-                {% endif %}
+                <a href="/reci/warning/{{comment.id}}/{{recipe.id}}"  align="right" style="color:red;font-size:14px;">delete  </a>
+               
                 {% endifequal %}
               </article>
             

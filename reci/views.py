@@ -52,12 +52,13 @@ def signin(request):
 
 def wishlist(request,id):
     wish=whishlist.objects.filter(author=id).distinct()
-    reci=recipes.objects.filter(author=id)
+    
+    print("whiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiish",wish)
     sum=0
     avglist=[]
 
-    for i in reci:
-            comment=comments.objects.filter(recipe=i.id)
+    for i in wish:
+            comment=comments.objects.filter(recipe=i.recepe.id)
             if len(comment)!=0:
                 
                 for avg in comment:
@@ -111,6 +112,7 @@ def update(request,id):
     if request.method=='POST':
         post = Profile.objects.get(user=id)
         post.image=request.FILES.get('pic')
+        print(post.image)
         post.save()
         messages.success(request,"Profile updated successfully!")
         return redirect('/reci/profile/'+str(id))
@@ -176,9 +178,11 @@ def delwish(request,id,usrid):
      
     obj.delete() 
     if request.POST.get('page') == 'recipe':
+            messages.error(request,"Recipe deleted from wishlist")
             return redirect('http://127.0.0.1:8000/reci/recipe/'+str(id))
     else:
-            messages.success(request,"Recipe delted wishlist")
+            print("happening")
+            messages.error(request,"Recipe deleted from wishlist")
             return redirect('http://127.0.0.1:8000/reci/wishlist/'+str(usrid))
 
 def search(request):
@@ -290,57 +294,54 @@ def wish(request,id,recid):
     return redirect('http://127.0.0.1:8000/reci/recipe/'+str(recid))
 
 def addrec(request):
-    if  request.method=="POST":
-        
-        
-        
-        if request.POST.get('title') and request.POST.get('descr')and request.POST.get('active_time')and request.POST.get('total_time')and request.POST.get('serves'):
-            post=recipes()
-            img=request.FILES
-            post.title= request.POST.get('title')
-            post.descr= request.POST.get('descr')
-            post.active_time= request.POST.get('active_time')
-            post.total_time= request.POST.get('total_time')
-            post.serves= request.POST.get('serves')
-            post.image=request.FILES.get('image')
-            post.author= request.user
-            if (recipes.objects.get(title=post.title))is None:
-                
+    cat = category.objects.all()
+    return render(request,'addrec.html',{'cat':cat})
+
+
+def addrecinsert(request):
+        if recipes.objects.filter(title=request.POST.get('title')).exists():
+            messages.error(request,"Recipe title already exists,try with another!")
+            return redirect('addrec')
+        else:
+            if request.POST.get('title') and request.POST.get('descr')and request.POST.get('active_time')and request.POST.get('total_time')and request.POST.get('serves'):
+                post=recipes()
+                img=request.FILES
+                post.title= request.POST.get('title')
+                post.descr= request.POST.get('descr')
+                post.active_time= request.POST.get('active_time')
+                post.total_time= request.POST.get('total_time')
+                post.serves= request.POST.get('serves')
+                post.image=request.FILES.get('image')
+                post.author= request.user
                 post.save()
-            else:
-                messages.error(request,"Recipe title already exists,try with another!")
-                return render(request,'addrec.html')
-            stpno=request.POST.getlist('steps[stepno]')
-            stps=request.POST.getlist('steps[addstep]')
-        
-            for i in range(0,len(stpno)):
-                # print(stpno[i])
-                # print(stps[i])
-                post.steps_set.create(
-                step=stps[i],
-                order_no=stpno[i],
-               )
-            ingr=request.POST.getlist('ingredients[no]')
-            for i in ingr:
-                post.integredients_set.create(
-                ingredient=i,
+                stpno=request.POST.getlist('steps[stepno]')
+                stps=request.POST.getlist('steps[addstep]')
+            
+                for i in range(0,len(stpno)):
+                    # print(stpno[i])
+                    # print(stps[i])
+                    post.steps_set.create(
+                    step=stps[i],
+                    order_no=stpno[i],
+                    )
+                ingr=request.POST.getlist('ingredients[no]')
+                for i in ingr:
+                    post.integredients_set.create(
+                    ingredient=i,
+                    )
+
+                categoriesList=request.POST.getlist('categories')
+                sam=recipes.objects.get(id=post.id)
+                for i in categoriesList:
+                    cate=reciepe_category()
+                    cate.recipe=sam
+                    cate.category=category.objects.get(id=i)
+                    cate.save()
                 
-               )
+                messages.success(request,"Recipe added successfully!")
+                return redirect('/')
+            else: 
+                messages.error(request,"Input Error!")
+                return redirect('addrec')
 
-            categoriesList=request.POST.getlist('categories')
-            sam=recipes.objects.get(id=post.id)
-            for i in categoriesList:
-                cate=reciepe_category()
-                cate.recipe=sam
-                cate.category=category.objects.get(id=i)
-                cate.save()
-            
-            messages.success(request,"Recipe added successfully!")
-            return render(request,'addrec.html')
-            
-        else: 
-            return render(request,'recipe.html')
-
-    else:
-        cat = category.objects.all()
-        return render(request,'addrec.html',{'cat':cat})
+    

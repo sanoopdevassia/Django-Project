@@ -31,26 +31,37 @@
 }
 </style>
 <body>
-
+  
 	<nav class="uk-navbar-container uk-letter-spacing-small">
 		<div class="uk-container">
 			<div class="uk-position-z-index" data-uk-navbar>
 				<div class="uk-navbar-left">
 					<a class="uk-navbar-item uk-logo" href="#">Oiishi</a>
 					<ul class="uk-navbar-nav uk-visible@m uk-margin-large-left">
-						<li class="uk-active"><a href="/">Home</a></li>
+            <li class="uk-active"><a href="/">Home</a></li>
+            <li><a href="/contact">Contact</a></li>
 						<li><a href="/reci/addrec">Add Recipe</a></li>
-						<li><a href="/reci/wishlist">Wishlists</a></li>
+						<li><a href="/reci/wishlist/{{user.id}}">Wishlists</a></li>
 						{% if user.is_authenticated %}
 						<li><a href="/reci/profile/{{user.id}}">Profile</a></li>
 						{%endif%}
 					
 						
 					</ul>
-				</div>
+        </div>
+        {% if messages %}
+  {% for message in messages %}
+  {% if message.tags == "success" %}  <script> alertify.success('{{message}}');</script> {% endif %}
+  {% if message.tags == "error" %}  <script> alertify.error('{{message}}');</script> {% endif %}
+
+  {% if message.tags == "warning" %}<script>alertify.confirm('Delete Comment', '{{message}}', function(){ window.location.replace("/reci/delcomment/{{comment.id}}/{{recipe.id}}"); }
+      , function(){ window.location.replace("/reci/recipe/{{recipe.id}}");});</script>{% endif %}
+  {% endfor %}
+
+  {% endif %}
 				<div class="uk-navbar-right">
 					<div>
-						<a class="uk-navbar-toggle" data-uk-search-icon href="#"></a>
+					
 						<div class="uk-drop uk-background-default"
 							data-uk-drop="mode: click; pos: left-center; offset: 0">
 							<form class="uk-search uk-search-navbar uk-width-1-1">

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User,auth
 from reci.models import recipes
 from django.contrib.auth import authenticate
 from .models import Profile
+from django.core.mail import send_mail
 
 
 def index(request):
@@ -27,6 +28,13 @@ def signup(request):
         else:
             user=User.objects.create_user(first_name=firstname,last_name=secondname,email=email,username=email,password=password)
             user.save()
+            send_mail(
+            'Welcome to oishii',
+            'Welcome to Oishi we are excited that you joned!    ',
+            'oishirecipes12@gmail.com',
+            [email],
+            fail_silently=False,
+                                )
             
             return render(request,'sign-in.html')
         

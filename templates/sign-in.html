@@ -21,15 +21,22 @@
 </head>
 
 <body>
-  <div>  {% include 'messages.html' %} </div>
+  {% if messages %}
+  {% for message in messages %}
+  {% if message.tags == "success" %}  <script> alertify.success('{{message}}');</script> {% endif %}
+  {% if message.tags == "error" %}  <script> alertify.error('{{message}}');</script> {% endif %}
+  {% if message.tags == "warning" %}  <script> alertify.warning('{{message}}');</script> {% endif %}
+  {% endfor %}
+  
+  {% endif %}
 <div class="uk-grid-collapse" data-uk-grid>
   <div class="uk-width-1-2@m uk-padding-large uk-flex uk-flex-middle uk-flex-center" data-uk-height-viewport>
     <div class="uk-width-3-4@s">
       <div class="uk-text-center uk-margin-bottom">
-        <a class="uk-logo uk-text-primary uk-text-bold" href="index.html">Oiishi</a>
+        <a class="uk-logo uk-text-primary uk-text-bold" href="index.html">Oishi</a>
       </div>
       <div class="uk-text-center uk-margin-medium-bottom">
-        <h1 class="uk-h2 uk-letter-spacing-small">Sign In to Oiishi</h1>
+        <h1 class="uk-h2 uk-letter-spacing-small">Sign In to Oishi</h1>
       </div>
       <div data-uk-grid class="uk-child-width-auto uk-grid-small uk-flex uk-flex-center uk-margin">
         <div>
@@ -83,7 +90,7 @@
 </div>
 
 </body>
-
+ 
 
 <!-- Mirrored from html-theme-kocina.now.sh/sign-in.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 28 Aug 2020 09:24:10 GMT -->
 </html>

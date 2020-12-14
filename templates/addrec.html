@@ -174,9 +174,8 @@
  		<div class="uk-grid-large data-uk-grid">
  			<div class="uk-width-1@m">
  				<div class="color-dark uk-border-rounded-large uk-light uk-padding uk-margin-top">
- 					<form class="form-style-9" action="addrec" method="POST" enctype="multipart/form-data">
+ 					<form class="form-style-9" action="addrecinsert" method="POST" enctype="multipart/form-data">
  						{% csrf_token %}
- 						<div> {% include 'messages.html' %} </div>
  						<ul>
  							<li>
  								<input type="text" name="title" class="field-style field-full align-none"
@@ -189,9 +188,9 @@
 
  							<li>
  								<input type="text" name="active_time" class="field-style field-split align-left"
- 									placeholder="Active Time" / required>
+ 									placeholder="Active Time(in minutes)" / required>
  								<input type="text" name="total_time" class="field-style field-split align-right"
- 									placeholder="Total Time" / required>
+ 									placeholder="Total Time(in minutes)" / required>
 
  							</li>
 
@@ -227,7 +226,7 @@
  							<li>Ingredients</li>
  							<li class="incr">
  								<input type="text" name="ingredients[no]" class="field-style field-split align-left"
- 									placeholder="Add Ingredient" required />
+ 									placeholder="Add Ingredient eg:1 cup milk" required />
  								<input id="addinc" type="button" value="Add" />
  							</li>
 
@@ -283,3 +282,4 @@
  	});
  </script>
  {% endblock %}
+ {% include 'messages.html' %}

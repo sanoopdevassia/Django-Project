@@ -7,6 +7,7 @@ urlpatterns = [
      path('sign-up',views.sigup,name='sign-up'),
      path('wishlist/<int:id>',views.wishlist,name='wishlist'),
      path('addrec',views.addrec,name='addrec'),
+     path('addrecinsert',views.addrecinsert,name='addrecinsert'),
      path('sign-in',views.signin,name='sign-in'),
      path('comment/<int:id>',views.comment,name='comment'),
      path('delcomment/<int:id>/<int:recid>',views.delcomment,name='delcomment'),
